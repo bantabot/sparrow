@@ -67,7 +67,7 @@ curl_close($curl);
 if ($err) {
     echo "cURL Error #:" . $err;
 } else {
-    $response =  json_decode($response);
+    $response =  json_decode($response, true);
     return $response;
 }
 }
@@ -164,8 +164,8 @@ function get_tickets($dbconn, $groups){
 //     if the authentication check passes, use credentials to create tickets
 if ($auth == true){
     $epic = create_epic($auth, $newhire);
-//    $epic = $epic['key'];
-    echo $epic['key'];
+    $epic = $epic['key'];
+
 }
 else {
     echo "bad creds";
@@ -174,9 +174,9 @@ else {
 $tickets= get_tickets($dbconn, $groups);
 
 
-//   while($ticket = $tickets->fetch_object()){
-//       create_story($auth, $ticket->title, $ticket->description, $epic);
-//   }
+   while($ticket = $tickets->fetch_object()){
+       create_story($auth, $ticket->title, $ticket->description, $epic);
+   }
 
 //    foreach ($tickets as $ticket) {
 //        create_story($auth, $ticket->title, $ticket->description);
