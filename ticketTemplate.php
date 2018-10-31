@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Document</title>
+
 </head>
 <body>
 
@@ -17,9 +18,11 @@
         <h1>Add Ticket</h1>
     </div>
 </div>
+
 <div class="container">
 
     <form action="templateSuccess.php" method="post">
+        <input type="hidden" name="submitted" value="true">
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" class="form-control" id="title" name="ticketTitle">
@@ -51,7 +54,7 @@
             </select>
 
         </div>
-        <button type="submit" class="btn btn-primary">Magic Time</button>
+        <button type="submit" class="btn btn-primary" name="submit">Magic Time</button>
 
 </div>
 
@@ -59,6 +62,25 @@
 
 
 </form>
+</div>
+<div class="container">
+<?php
+//
+//    if(isset($_POST['submit'])){
+//    include 'templateSuccess.php';
+//        $title = $_POST['ticketTitle'];
+//        $description = $_POST['ticketDescription'];
+//        $groupName = $_POST['group'];
+//        $assignee = $_POST['ticketAssignee'];
+//        $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
+//        echo '<div class="alert alert-success" role="alert">'.$saveMessage.'</div>';
+//
+//    }
+//    var_dump($_POST);
+//
+//
+//
+//?>
 </div>
 
 <!--Bootstrap js-->
