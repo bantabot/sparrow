@@ -56,12 +56,7 @@
             <input type="text" class="form-control" name="newHire" id="newHire">
 
         </div>
-        <div class="form-group">
-            <label for="startDate" >Start Date</label>
 
-                <input class="form-control" type="date" name="startDate" id="startDate">
-
-        </div>
         <div class="form-group">
             <label for="group">What group are they in?</label>
             <select class="form-control" id="group" name="group">

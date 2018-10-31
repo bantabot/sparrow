@@ -113,8 +113,8 @@ if ($err) {
 }
 }
 
-// get tickets from DB
-// SELECT * FROM `sparrow` WHERE `group` IN $groups
+// get tickets from DB based on group_name
+
 
 
 function get_tickets($dbconn, $groups){
@@ -122,11 +122,25 @@ function get_tickets($dbconn, $groups){
     $sql = "SELECT * FROM templates WHERE group_name IN ('$groups')";
     $result = mysqli_query($dbconn, $sql);
 
+
     return $result;
 
 
     mysqli_close($dbconn);
 
+
+}
+
+// save a new ticket to DB
+
+function save($title, $description, $groupName, $assignee, $dbconn){
+    $sql = "INSERT INTO templates (`title`, `description`, `group_name`, `assignee`) VALUES ('$title', '$description', '$groupName', '$assignee')";
+    if (mysqli_query($dbconn, $sql)) {
+        return  "New record created successfully";
+    } else {
+        return "Error: " . $sql . "<br>" . mysqli_error($dbconn);
+    }
+    mysqli_close($dbconn);
 
 }
 

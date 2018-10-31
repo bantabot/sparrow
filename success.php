@@ -48,11 +48,10 @@ else {
 
 $tickets= get_tickets($dbconn, $groups);
 
-if ($auth ==true){
 
 while($ticket = $tickets->fetch_object()){
     $story_log= create_story($auth, $ticket->title, $ticket->description, $epic);
-}}
+}
 
 $epicLink = "https://rsglab.atlassian.net/browse/".$epic;
 

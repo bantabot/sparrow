@@ -63,25 +63,7 @@
 
 </form>
 </div>
-<div class="container">
-<?php
-//
-//    if(isset($_POST['submit'])){
-//    include 'templateSuccess.php';
-//        $title = $_POST['ticketTitle'];
-//        $description = $_POST['ticketDescription'];
-//        $groupName = $_POST['group'];
-//        $assignee = $_POST['ticketAssignee'];
-//        $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
-//        echo '<div class="alert alert-success" role="alert">'.$saveMessage.'</div>';
-//
-//    }
-//    var_dump($_POST);
-//
-//
-//
-//?>
-</div>
+
 
 <!--Bootstrap js-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
