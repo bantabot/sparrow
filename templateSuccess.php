@@ -22,31 +22,42 @@ $assignee = $_POST['ticketAssignee'];
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Document</title>
-</head>
-<body>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container-fluid text-center">
-        <h1>Sparrow</h1>
-        <p class="lead">All Aboard, your first mate to make onboarding a little bit lighter</p>
-    </div>
-</div>
-<div class="container">
-    <?php
-    $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
-    echo '<p class="text-center">'.$saveMessage.' </p>';
-    echo '<p class="text-center"> Click <a href="ticketTemplate.php"> here </a> to add another';
-   ?>
+    <style>
+        h1 {
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+    </style>
 
-</div>
+    <title>Sparrow</title>
+</head>
+
+<body>
+<!------------------Begin Header------------------>
+
+    <div class="jumbotron jumbotron-fluid" style="background-color: #ffe01b;">
+        <div class="container-fluid text-center">
+            <h1>Sparrow</h1>
+            <p class="lead">All Aboard, your first mate to make onboarding a little bit lighter</p>
+        </div>
+    </div>
+
+<!------------------End Header------------------>
+
+    <div class="container">
+        <?php
+        $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
+        echo '<p class="text-center">' . $saveMessage . ' </p>';
+        echo '<p class="text-center"> Click <a href="ticketTemplate.php"> here </a> to add another';
+        ?>
+    </div>
+
+<!--Bootstrap js-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-
-</html>
 
 </body>
+
 </html>
 
 
