@@ -13,7 +13,6 @@ $auth = base64_encode($auth);
 
 $managerName = $_POST['managerName'];
 $newhire = $_POST['newHire'];
-$startDate = $_POST['startDate'];
 
 
 //Set group to have at least the engineering group
@@ -39,23 +38,39 @@ $groups = implode("', '", $groups);
 
 // -----------------------end of grabbing global variables-----------------------
 
-//     if the authentication check passes, use credentials to create tickets
-if ($auth == true) {
+
+
+// Check auth creds
+$authCheck = auth_check($auth);
+
+// if username works then create epic
+if ($authCheck == true) {
     $epic = create_epic($auth, $newhire);
     $epic = $epic['key'];
 
 } else {
-    echo "bad creds";
+    $epic = false;
 }
 
-$tickets = get_tickets($dbconn, $groups);
+// if the epic has been created then go to create tickets
+
+if ($epic != false){
+
+    $tickets = get_tickets($dbconn, $groups);
 
 
-while ($ticket = $tickets->fetch_object()) {
-    $story_log = create_story($auth, $ticket->title, $ticket->description, $epic);
+    while ($ticket = $tickets->fetch_object()) {
+        $story_log = create_story($auth, $ticket->title, $ticket->description, $epic);
+    }
+
+    $epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
 }
 
-$epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
+else{
+    //redirect to error page
+    header('Location: error.php');
+
+}
 
 ?>
 
@@ -88,9 +103,13 @@ $epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
 <!------------------End Header------------------>
 
 <!------------------Success Response with Epic Link------------------>
-    <div class="container">
+    <div class="container text-center">
 
-        <?php echo '<p class="text-center">Great! Click <a href="' . $epicLink . '">Here</a> to get started </p>'; ?>
+        <?php echo '<p class="text-center">Awesome '.$managerName.'! </p>';
+              echo '<p> Next step is to check out what tasks await</p>';
+              echo '<p>Here is your brand new shiny epic: <a href="' . $epicLink . '">'.$epicLink.'</a> </p>'; ?>
+
+        <iframe src="https://giphy.com/embed/3o6fJ2bdNfhd6e144w" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mailchimp-high-five-3o6fJ2bdNfhd6e144w"></a></p>
 
     </div>
 

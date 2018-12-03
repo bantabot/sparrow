@@ -34,20 +34,20 @@
     <div class="container">
         <form action="success.php" method="post">
 
-<!------------------ Get jira username-------------->
+        <!------------------ Get jira username-------------->
 
             <div class="form-group">
                 <label for="jiraUsername">Jira Username:</label>
                 <input type="text" class="form-control" id="jiraUsername" name="username">
             </div>
 
-<!------------------ Get jira password------------------>
+        <!------------------ Get jira password------------------>
 
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" name="password" class="form-control" id="password">
 
-<!------------------Password help------------------>
+            <!------------------Password help------------------>
 
                 <small>Having trouble finding your password? Check this out <a href="#passwordinstructions" data-toggle="collapse" class="btn btn-outline-info btn-sm" role="button" aria-expanded="false" aria-controls="collapseExample">here</a>
                     <div class="collapse" id="passwordinstructions">
@@ -64,23 +64,23 @@
                 </small>
             </div>
 
-<!------------------End Password------------------>
+        <!------------------End Password------------------>
 
-<!--Manager Name-->
+        <!--Manager Name-->
 
             <div class="form-group">
                 <label for="managerName">Manager Name:</label>
                 <input type="text" class="form-control" id="managerName" name="managerName">
             </div>
 
-<!--New Hire Name-->
+        <!--New Hire Name-->
 
             <div class="form-group">
                 <label for="newHire">New Hire</label>
                 <input type="text" class="form-control" name="newHire" id="newHire">
             </div>
 
-<!--Get group_name-->
+        <!--Get group_name-->
 
             <div class="form-group">
                 <label for="group">What group are they in?</label>
@@ -91,7 +91,7 @@
                 </select>
             </div>
 
-<!--Submit Button  -->
+        <!--Submit Button  -->
 
             <button type="submit" class="btn btn-primary">Magic Time</button>
         </form>

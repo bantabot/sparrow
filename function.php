@@ -26,7 +26,7 @@
                     "Authorization: Basic " . $auth . "",
                     "Cache-Control: no-cache",
                     "Content-Type: application/json",
-                    "Postman-Token: bf411a5f-07e5-40cb-b143-6c8d9c4a66ab"
+
                 ),
             ));
 
@@ -127,7 +127,7 @@
             return $result;
 
 
-            mysqli_close($dbconn);
+
 
 
         }
@@ -142,9 +142,23 @@
             } else {
                 return "Error: " . $sql . "<br>" . mysqli_error($dbconn);
             }
-            mysqli_close($dbconn);
+
 
         }
+
+        // Log actions to error table
+
+        function log_request($managerName, $newhireName, $templateId, $jiraTicket, $response){
+            $sql = "INSERT INTO `epic_logs` (`id`, `request_id`, `manager_name`, `newhire_name`, `template_id`, `jira_ticket`, `start_date`, `create_datetime`, `response_text`) VALUES (NULL, '', '$managerName', '$newhireName', '$templateId', '$jiraTicket', '2018-12-02', CURRENT_TIMESTAMP, '$response')";
+            if (mysqli_query($dbconn, $sql)) {
+                 $logResponse = "Event Logged";
+
+            } else {
+                $logResponse= "Error: " . $sql . "<br>" . mysqli_error($dbconn);
+            }
+            return $logResponse;
+        }
+
 
 //-------------------------End of defining functions
 
