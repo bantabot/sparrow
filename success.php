@@ -61,6 +61,7 @@ if ($epic != false){
 
     while ($ticket = $tickets->fetch_object()) {
         $story_log = create_story($auth, $ticket->title, $ticket->description, $epic);
+       $log = log_request($managerName, $newhire, $ticket->id, $story_log['key'], $story_log['self'], $dbconn );
     }
 
     $epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
@@ -71,7 +72,6 @@ else{
     header('Location: error.php');
 
 }
-
 ?>
 
 <html>
@@ -107,7 +107,9 @@ else{
 
         <?php echo '<p class="text-center">Awesome '.$managerName.'! </p>';
               echo '<p> Next step is to check out what tasks await</p>';
-              echo '<p>Here is your brand new shiny epic: <a href="' . $epicLink . '">'.$epicLink.'</a> </p>'; ?>
+              echo '<p>Here is your brand new shiny epic: <a href="' . $epicLink . '">'.$epicLink.'</a> </p>';
+
+              ?>
 
         <iframe src="https://giphy.com/embed/3o6fJ2bdNfhd6e144w" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mailchimp-high-five-3o6fJ2bdNfhd6e144w"></a></p>
 

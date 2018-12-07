@@ -1,3 +1,9 @@
+<?php
+
+include 'mysql_connection.php';
+include 'function.php';
+?>
+
 <html>
 
 <head>
@@ -32,8 +38,21 @@
 
 <div>
     <div class="container-fluid text-center">
-        <h3> Zoinks! There was an error!</h3>
-        <p>Start again <a href="hello.php">here</a></p>
+
+
+
+
+        <?php
+        $groups = get_groups($dbconn);
+        var_dump($groups->fetch_object());
+        foreach ($groups as $group){
+            echo ' <div class="form-check">';
+            echo '<input type="checkbox" class="form-check-input" id="group">';
+           echo '<label class="form-check-label" for="group">'.$group.'</label>  </div>';
+        }
+
+        ?>
+
 
     </div>
 </div>

@@ -111,6 +111,7 @@
             if ($err) {
                 echo "cURL Error #:" . $err;
             } else {
+                $response = json_decode($response, true);
                 return $response;
             }
         }
@@ -122,14 +123,15 @@
 
             $sql = "SELECT * FROM templates WHERE group_name IN ('$groups')";
             $result = mysqli_query($dbconn, $sql);
-
-
             return $result;
+        }
 
-
-
-
-
+        //Get group names
+        function get_groups($dbconn)
+        {
+                    $sql ="SELECT group_name FROM templates GROUP BY group_name";
+                    $result = mysqli_query($dbconn, $sql);
+                    return $result;
         }
 
 // save a new ticket to DB
@@ -148,8 +150,8 @@
 
         // Log actions to error table
 
-        function log_request($managerName, $newhireName, $templateId, $jiraTicket, $response){
-            $sql = "INSERT INTO `epic_logs` (`id`, `request_id`, `manager_name`, `newhire_name`, `template_id`, `jira_ticket`, `start_date`, `create_datetime`, `response_text`) VALUES (NULL, '', '$managerName', '$newhireName', '$templateId', '$jiraTicket', '2018-12-02', CURRENT_TIMESTAMP, '$response')";
+        function log_request($managerName, $newhireName, $templateId, $jiraTicket, $response, $dbconn){
+            $sql = "INSERT INTO `epic_logs` ( `manager_name`, `newhire_name`, `template_id`, `jira_ticket`, `response_text`) VALUES ('$managerName', '$newhireName', '$templateId', '$jiraTicket', '$response')";
             if (mysqli_query($dbconn, $sql)) {
                  $logResponse = "Event Logged";
 
