@@ -121,7 +121,15 @@
         function get_tickets($dbconn, $groups)
         {
 
-            $sql = "SELECT * FROM templates WHERE group_name IN ('$groups')";
+            $sql = "SELECT * FROM templates WHERE group_name IN ('$groups') AND visible='true'";
+            $result = mysqli_query($dbconn, $sql);
+            return $result;
+        }
+        // get ticket by ID
+        function get_tickets_id($dbconn, $id)
+        {
+
+            $sql = "SELECT * FROM templates WHERE id=$id AND visible='true'";
             $result = mysqli_query($dbconn, $sql);
             return $result;
         }
@@ -131,7 +139,11 @@
         {
                     $sql ="SELECT group_name FROM templates GROUP BY group_name";
                     $result = mysqli_query($dbconn, $sql);
-                    return $result;
+            while ($group = $result->fetch_assoc()) {
+                $groupArr[] = $group;
+            }
+
+                    return $groupArr;
         }
 
 // save a new ticket to DB
@@ -141,6 +153,31 @@
             $sql = "INSERT INTO templates (`title`, `description`, `group_name`, `assignee`) VALUES ('$title', '$description', '$groupName', '$assignee')";
             if (mysqli_query($dbconn, $sql)) {
                 return "New template created!";
+            } else {
+                return "Error: " . $sql . "<br>" . mysqli_error($dbconn);
+            }
+
+
+        }
+
+        //Update an existing ticket
+        function update($title, $description, $groupName, $assignee, $id, $dbconn)
+        {
+            $sql = "UPDATE `templates` SET `title` = '$title', `description` = '$description', `group_name`='$groupName', `assignee`= '$assignee' WHERE `templates`.`id` = $id";
+            if (mysqli_query($dbconn, $sql)) {
+                return "Template Updated";
+            } else {
+                return "Error: " . $sql . "<br>" . mysqli_error($dbconn);
+            }
+
+
+        }
+        //Delete ticket
+        function delete($id, $dbconn)
+        {
+            $sql = "UPDATE `templates` SET `visible`= 'false' WHERE `templates`.`id` = $id";
+            if (mysqli_query($dbconn, $sql)) {
+                return "Template Deleted";
             } else {
                 return "Error: " . $sql . "<br>" . mysqli_error($dbconn);
             }

@@ -9,6 +9,10 @@ $title = $_POST['ticketTitle'];
 $description = $_POST['ticketDescription'];
 $groupName = $_POST['group'];
 $assignee = $_POST['ticketAssignee'];
+$id = $_POST['ID'];
+$delete = $_POST['delete'];
+
+
 
 
 ?>
@@ -45,9 +49,21 @@ $assignee = $_POST['ticketAssignee'];
 
     <div class="container">
         <?php
-        $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
-        echo '<p class="text-center">' . $saveMessage . ' </p>';
+
+        if (isset($delete)){
+            $delete = $delete($id, $dbconn);
+            echo '<p class="text-center">' . $delete . ' </p>';
+        }
+          elseif (isset($id)){
+            $update = update($title, $description, $groupName, $assignee, $id, $dbconn);
+            echo '<p class="text-center">' . $update . ' </p>';
+        }
+        else {
+            $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
+            echo '<p class="text-center">' . $saveMessage . ' </p>';
+        }
         echo '<p class="text-center"> Click <a href="ticketTemplate.php"> here </a> to add another';
+
         ?>
     </div>
 

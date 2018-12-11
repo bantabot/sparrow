@@ -2,7 +2,18 @@
 
 include 'mysql_connection.php';
 include 'function.php';
+
+//Get POST variables
+
+$groups = [];
+foreach ($_POST as $key => $value){
+    $groups[] = $key;
+}
+$groups = implode("', '", $groups);
+$tickets = get_tickets($dbconn, $groups);
 ?>
+
+
 
 <html>
 
@@ -42,15 +53,19 @@ include 'function.php';
 
         <form action="ticketView.php" method="post">
 
-        <?php
-        $groups = get_groups($dbconn);
-        foreach ($groups as $group){
-            echo ' <div class="form-check">';
-            echo '<input type="checkbox" class="form-check-input" id="group" name="'.$group['group_name'].'">';
-           echo '<label class="form-check-label" for="group">'.$group['group_name'].'</label>  </div>';
-        }
+            <?php
 
-        ?>
+
+            while ($ticket = $tickets->fetch_object()) {
+                echo '<div class="card">';
+                echo '<div class="card-body"> <h5 class="card-title">'. $ticket->title.'</h5>';
+               echo '<p class="card-text">'. $ticket->description.'</p>';
+               echo '<a class="card-link" href="editTicket.php?id='.$ticket->id.'">Edit Ticket</a>';
+               echo '</div> </div>';
+
+            }
+
+            ?>
             <button type="submit" class="btn btn-primary">Magic Time</button>
         </form>
 
