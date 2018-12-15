@@ -60,8 +60,11 @@ if ($epic != false){
 
 
     while ($ticket = $tickets->fetch_object()) {
+
+
         $story_log = create_story($auth, $ticket->title, $ticket->description, $epic);
-       $log = log_request($managerName, $newhire, $ticket->id, $story_log['key'], $story_log['self'], $dbconn );
+       $story_log = mysqli_real_escape_string($dbconn, $story_log);
+        $log = log_request($managerName, $newhire, $ticket->id, $story_log['key'], $story_log, $dbconn );
     }
 
     $epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
@@ -73,34 +76,12 @@ else{
 
 }
 ?>
+<?php
 
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+include 'view/header.php';
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        h1 {
-            font-family: Georgia, "Times New Roman", Times, serif;
-        }
-    </style>
+?>
 
-    <title>Sparrow</title>
-</head>
-<body>
-
-<!------------------Begin Header------------------>
-    <div class="jumbotron jumbotron-fluid" style="background-color: #ffe01b;">
-        <div class="container-fluid text-center">
-            <h1>Sparrow</h1>
-            <p class="lead">All Aboard, your first mate to make onboarding a little bit lighter</p>
-        </div>
-    </div>
-
-<!------------------End Header------------------>
 
 <!------------------Success Response with Epic Link------------------>
     <div class="container text-center">
@@ -114,13 +95,5 @@ else{
         <iframe src="https://giphy.com/embed/3o6fJ2bdNfhd6e144w" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mailchimp-high-five-3o6fJ2bdNfhd6e144w"></a></p>
 
     </div>
-
-<!--Bootstrap js-->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
-
+<?php
+include 'view/footer.html';?>
