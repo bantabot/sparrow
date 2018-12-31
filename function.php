@@ -1,19 +1,27 @@
 <?php
+include 'requester.php';
+
+//instantiate requester class to be used in make_call
+
+
 
 
 //-------------------Start defining functions----------------------------
 
-function make_call(){
-    $curl = curl_init();
+function make_call($url, $description, $action, $auth){
+    $requester = new Requester;
+   $curl = $requester->my_curl_init();
+  // $curl = $requester->curl;
+    //$curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://rsglab.atlassian.net/rest/api/2/issue",
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "{\n\t\"fields\": {\n\n\t\t\"summary\": \"Onboarding for " . $newhire . "\",\n\t\t\"customfield_10009\": \"Onboarding for " . $newhire . "  \",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10000\"\n\n\t\t},\n\n\t\t\"project\": {\n\t\t\t\"key\": \"DC\"\n\n\t\t},\n\t\t\"description\": \"We heavily use Atlassian JIRA at MailChimp as a way to keep track of the different work status and communicate in an asynchronous fashion. This onboarding JIRA series aims at providing guidance around how to organize your time during your onboarding at MailChimp. We encourage you to use the JIRA features to keep track of your progress (via the ticket workflow) and communicate (using JIRA comments with wiki syntax) with your manager and colleagues. Welcome to Mailchimp " . $newhire . "!!!\"\n\n\t}\n}",
+        CURLOPT_CUSTOMREQUEST => $action,
+        CURLOPT_POSTFIELDS => $description,
         CURLOPT_HTTPHEADER => array(
             "Authorization: Basic " . $auth . "",
             "Cache-Control: no-cache",
@@ -22,16 +30,20 @@ function make_call(){
         ),
     ));
 
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
+//    $response = curl_exec($curl);
+  $response = $requester->my_curl_exec();
+    //$err = curl_error($curl);
+   $err = $requester->my_curl_error();
 
-    curl_close($curl);
+    //curl_close($curl);
+    $requester->my_curl_close();
 
     if ($err) {
         echo "cURL Error #:" . $err;
     } else {
         return $response;
     }
+//    $requester->my_curl_get_response();
 
 
 }
