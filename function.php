@@ -63,38 +63,13 @@ include 'requester.php';
         {
 
             $description = json_encode($description);
+            $postfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"" . $title . "\",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10001\"\n\t\t},\n\t\t\"project\": {\n\t\t\t\"key\": \"DC\"\n\n\t\t},\n\t\t\"description\": {\n\t\t\t\"version\": 1,\n\t\t\t\"type\": \"doc\",\n\t\t\t\"content\": [{\n\t\t\t\t\"type\": \"paragraph\",\n\t\t\t\t\"content\": [{\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": " . $description . "\n\t\t\t\t}]\n\t\t\t}]\n\t\t},\n\t\t\"customfield_10008\": \"" . $epic . "\"\n\t}\n}";
+            $url = "https://rsglab.atlassian.net/rest/api/3/issue";
+            $post = "POST";
+            $response = make_call($url, $post, $postfields, $auth);
+            return $response;
 
-            $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://rsglab.atlassian.net/rest/api/3/issue",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\n\t\"fields\": {\n\n\t\t\"summary\": \"" . $title . "\",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10001\"\n\t\t},\n\t\t\"project\": {\n\t\t\t\"key\": \"DC\"\n\n\t\t},\n\t\t\"description\": {\n\t\t\t\"version\": 1,\n\t\t\t\"type\": \"doc\",\n\t\t\t\"content\": [{\n\t\t\t\t\"type\": \"paragraph\",\n\t\t\t\t\"content\": [{\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": " . $description . "\n\t\t\t\t}]\n\t\t\t}]\n\t\t},\n\t\t\"customfield_10008\": \"" . $epic . "\"\n\t}\n}",
-                CURLOPT_HTTPHEADER => array(
-                    "Authorization: Basic " . $auth . "",
-                    "Cache-Control: no-cache",
-                    "Content-Type: application/json",
-
-                ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-                $response = "cURL Error #:" . $err;
-                return $response;
-            } else {
-//                $response = json_decode($response, true);
-                return $response;
-            }
         }
 
 // get tickets from DB based on group_name
