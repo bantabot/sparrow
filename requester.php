@@ -50,7 +50,6 @@
 
             $this->optionArray = array(
                 CURLOPT_URL => $url,
-                //Could this be pulled out and set to $optionArray by default?
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -64,6 +63,7 @@
                     "Content-Type: application/json",
 
                 ));
+            return $this->optionArray;
 
 
         }
@@ -72,6 +72,7 @@
         {
 
                $this->curlSetOp = curl_setopt_array($this->curl, $this->optionArray);
+               return $this->curlSetOp;
         }
 
         function my_curl_exec()
@@ -99,6 +100,16 @@
             else {
                 return $this->response;
             }
+        }
+
+        function get_response()
+        {
+           return $this->response;
+
+        }
+        function get_error()
+        {
+            return $this->err;
         }
 
 

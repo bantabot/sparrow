@@ -14,7 +14,11 @@ $epicDescription = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"Onboarding for  Ali
 $authDescription = "";
 
 $get = "GET";
+$post = "POST";
 
-$response = make_call($authUrl, $authDescription, $get, $auth);
 
-echo $response;
+//$response = make_call($storyUrl, $post, $storyDescription, $myAuth);
+//$response = create_epic($myAuth);
+$response = auth_check($myAuth);
+//$response->print_response();
+var_dump($response);

@@ -1,6 +1,7 @@
 <?php
 
 include 'mysql_connection.php';
+include 'config.php';
 include 'function.php';
 
 
@@ -43,9 +44,10 @@ $groups = implode("', '", $groups);
 // Check auth creds
 $authCheck = auth_check($auth);
 
+
 // if username works then create epic
-if ($authCheck == true) {
-    $epic = create_epic($auth, $newhire);
+if ($authCheck['name'] == $username) {
+    $epic = create_epic($auth);
     $epic = $epic['key'];
 
 } else {
