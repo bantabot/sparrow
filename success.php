@@ -3,6 +3,7 @@
 include 'mysql_connection.php';
 include 'config.php';
 include 'function.php';
+include 'jira.php';
 
 
 // ---------------Define variables  ----------------------------

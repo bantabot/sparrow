@@ -2,6 +2,7 @@
 
 include 'function.php';
 include 'config.php';
+include 'jira.php';
 
 
 
@@ -13,12 +14,36 @@ $storyDescription = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"testing file\",\n\
 $epicDescription = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"Onboarding for  Ali\",\n\t\t\"customfield_10009\": \"Onboarding for  Ali  \",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10000\"\n\n\t\t},\n\n\t\t\"project\": {\n\t\t\t\"key\": \"DC\"\n\n\t\t},\n\t\t\"description\": \"We heavily use Atlassian JIRA at MailChimp as a way to keep track of the different work status and communicate in an asynchronous fashion. This onboarding JIRA series aims at providing guidance around how to organize your time during your onboarding at MailChimp. We encourage you to use the JIRA features to keep track of your progress (via the ticket workflow) and communicate (using JIRA comments with wiki syntax) with your manager and colleagues. Welcome to Mailchimp  Ali!!!\"\n\n\t}\n}";
 $authDescription = "";
 
+$summary = "Onboarding for  Ali";
+$projjectKey = "DC";
+$description = "We heavily use Atlassian JIRA at MailChimp as a way to keep track of the different work status and communicate in an asynchronous fashion. This onboarding JIRA series aims at providing guidance around how to organize your time during your onboarding at MailChimp. We encourage you to use the JIRA features to keep track of your progress (via the ticket workflow) and communicate (using JIRA comments with wiki syntax) with your manager and colleagues. Welcome to Mailchimp  Ali!!!";
+
+$storySummary = "testing file";
+$storyDescription = "Test";
+
 $get = "GET";
 $post = "POST";
 
 
 //$response = make_call($storyUrl, $post, $storyDescription, $myAuth);
 //$response = create_epic($myAuth);
-$response = auth_check($myAuth);
+//$response = auth_check($myAuth);
 //$response->print_response();
-var_dump($response);
+//var_dump($response);
+
+
+$testJiraClass = new Jira;
+
+$testJiraClass->set_jira_auth($username, $password);
+//$testJiraClass->jira_auth_check();
+
+$testJiraClass->set_epic_postfields($summary, $projjectKey, $description);
+$testJiraClass->jira_epic_create();
+$testJiraClass->set_story_postfields($storySummary, $projjectKey, $storyDescription);
+$testJiraClass->jira_story_create();
+
+
+
+
+var_dump($testJiraClass);
+

@@ -48,8 +48,8 @@ include 'requester.php';
         {
             $url = "https://rsglab.atlassian.net/rest/api/3/myself";
             $action = "GET";
-            $description = "";
-            $response = make_call($url, $action, $description, $auth);
+            $postfields = "";
+            $response = make_call($url, $action, $postfields, $auth);
             $response = json_decode($response->get_response(), true);
             return $response;
 
