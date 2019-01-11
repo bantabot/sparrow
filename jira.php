@@ -3,13 +3,18 @@
 
 class jira extends requester
 {
-    private $url = null;
-    private $action = null;
+    private $url = "";
+    private $action = "";
+    private $epicPostfields = null;
+    private $storyPostfields = null;
     private $postfields = null;
-    private $auth = null;
+    private $auth = "";
     private $authCheckResponse = null;
     private $epicCreateResponse = null;
     private $storyCreateResponse = null;
+    private $isAuth = false;
+    private $username = "";
+
     
     function set_jira_url()
     {
@@ -28,6 +33,7 @@ class jira extends requester
     
     function set_jira_auth($username, $password)
     {
+        $this->username = $username;
         $this->auth = $username . ":" . $password;
         $this->auth = base64_encode($this->auth);
         return $this->auth;
@@ -36,8 +42,8 @@ class jira extends requester
 
     function set_epic_postfields($summary, $projectKey, $description)
     {
-        $this->postfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"".$summary."\",\n\t\t\"customfield_10009\": \"".$summary."  \",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10000\"\n\n\t\t},\n\n\t\t\"project\": {\n\t\t\t\"key\": \"".$projectKey."\"\n\n\t\t},\n\t\t\"description\": \"".$description."\"\n\n\t}\n}";
-        return $this->postfields;
+        $this->epicPostfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"".$summary."\",\n\t\t\"customfield_10009\": \"".$summary."  \",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10000\"\n\n\t\t},\n\n\t\t\"project\": {\n\t\t\t\"key\": \"".$projectKey."\"\n\n\t\t},\n\t\t\"description\": \"".$description."\"\n\n\t}\n}";
+        return $this->epicPostfields;
 
 
     }
@@ -46,11 +52,20 @@ class jira extends requester
     {
         $description = json_encode($description);
         $epicKey = $this->epicCreateResponse['key'];
+        $this->storyPostfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"" . $summary . "\",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10001\"\n\t\t},\n\t\t\"project\": {\n\t\t\t\"key\": \"$projectKey\"\n\n\t\t},\n\t\t\"description\": {\n\t\t\t\"version\": 1,\n\t\t\t\"type\": \"doc\",\n\t\t\t\"content\": [{\n\t\t\t\t\"type\": \"paragraph\",\n\t\t\t\t\"content\": [{\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": " . $description . "\n\t\t\t\t}]\n\t\t\t}]\n\t\t},\n\t\t\"customfield_10008\": \"" . $epicKey . "\"\n\t}\n}";
+        return $this->storyPostfields;
 
-        $this->postfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"" . $summary . "\",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10001\"\n\t\t},\n\t\t\"project\": {\n\t\t\t\"key\": \"$projectKey\"\n\n\t\t},\n\t\t\"description\": {\n\t\t\t\"version\": 1,\n\t\t\t\"type\": \"doc\",\n\t\t\t\"content\": [{\n\t\t\t\t\"type\": \"paragraph\",\n\t\t\t\t\"content\": [{\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": " . $description . "\n\t\t\t\t}]\n\t\t\t}]\n\t\t},\n\t\t\"customfield_10008\": \"" . $epicKey . "\"\n\t}\n}";
-        return $this->postfields;
 
+    }
 
+    function get_isAuth()
+    {
+        return $this->isAuth;
+    }
+
+    function get_epic_key()
+    {
+        return $this->epicCreateResponse['key'];
     }
     
 
@@ -62,8 +77,9 @@ class jira extends requester
         $this->my_curl_exec();
         $this->my_curl_error();
         $this->my_curl_close();
-      // I think I should take this out and move it to another method. This is to be more explicit  $this->my_curl_get_response();
-        return $this;
+      // I think I should take this out and move it to another method. This is to be more explicit
+        return $this->get_response();
+
 
     }
 
@@ -74,8 +90,12 @@ class jira extends requester
         $this->url = "https://rsglab.atlassian.net/rest/api/3/myself";
         $this->action = "GET";
         $this->postfields = "";
-        $this->authChekcResponse = $this->make_jira_call();
-        $this->authChekcResponse  = json_decode($this->get_response(), true);
+        $this->authCheckResponse = $this->make_jira_call();
+        $this->authCheckResponse  = json_decode($this->authCheckResponse, true);
+        if ($this->authCheckResponse['name'] == $this->username)
+        {
+            $this->isAuth = true;
+        }
         return $this->authCheckResponse;
 
     }
@@ -84,17 +104,23 @@ class jira extends requester
     {
         $this->url  = "https://rsglab.atlassian.net/rest/api/2/issue";
         $this->action = "POST";
+        $this->postfields = $this->epicPostfields;
 
-        if($this->postfields)
+        if(isset($this->postfields) && $this->isAuth)
         {
             $this->epicCreateResponse = $this->make_jira_call();
             $this->epicCreateResponse = json_decode($this->get_response(), true);
             return $this->epicCreateResponse;
          }
-         else
+         elseif (!isset($this->postfields))
              {
                  //return some error that
                  $this->epicCreateResponse = "must have postfields set";
+                 return $this->epicCreateResponse;
+             }
+             else
+             {
+                 $this->epicCreateResponse = "Check authentication credentials";
                  return $this->epicCreateResponse;
              }
     }
@@ -103,18 +129,23 @@ class jira extends requester
     {
         $this->url = "https://rsglab.atlassian.net/rest/api/3/issue";
         $this->action = "POST";
+        $this->postfields = $this->storyPostfields;
 
-        if($this->postfields)
+        if(isset($this->postfields) && isset($this->epicCreateResponse['key']))
         {
             $this->storyCreateResponse = $this->make_jira_call();
             $this->storyCreateResponse = json_decode($this->get_response(), true);
             return $this->storyCreateResponse;
         }
-        else
+        elseif(!isset($this->postfields))
         {
             //return some error that
             $this->storyCreateResponse = "must have postfields set";
             return $this->storyCreateResponse;
+        }
+        else
+        {
+            $this->storyCreateResponse = "must have an epic key set";
         }
     }
 

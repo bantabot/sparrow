@@ -13,8 +13,14 @@ include 'jira.php';
 $auth = $_POST['username'] . ":" . $_POST['password'];
 $auth = base64_encode($auth);
 
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+
 $managerName = $_POST['managerName'];
 $newhire = $_POST['newHire'];
+
+$jiraClass = new Jira ;
 
 
 //Set group to have at least the engineering group
@@ -43,41 +49,36 @@ $groups = implode("', '", $groups);
 
 
 // Check auth creds
-$authCheck = auth_check($auth);
+$jiraClass->set_jira_auth($username, $password);
 
+$authCheck = $jiraClass->jira_auth_check();
 
-// if username works then create epic
-if ($authCheck['name'] == $username) {
-    $epic = create_epic($auth);
-    $epic = $epic['key'];
-
-} else {
-    $epic = false;
-}
-
-// if the epic has been created then go to create tickets
-
-if ($epic != false){
-
-    $tickets = get_tickets($dbconn, $groups);
-
-
-    while ($ticket = $tickets->fetch_object()) {
-
-
-        $story_log = create_story($auth, $ticket->title, $ticket->description, $epic);
-       $story_log = mysqli_real_escape_string($dbconn, $story_log);
-        $log = log_request($managerName, $newhire, $ticket->id, $story_log['key'], $story_log, $dbconn );
+if (!$jiraClass->get_isAuth())
+    {
+         //redirect to error page
+    header('Location: error.php');
     }
 
-    $epicLink = "https://rsglab.atlassian.net/browse/" . $epic;
+$jiraClass->set_epic_postfields($summary, $projectKey, $description);
+$epic = $jiraClass->jira_epic_create();
+
+$tickets = get_tickets($dbconn, $groups);
+$epicKey = $jiraClass->get_epic_key();
+$epicLink = "https://rsglab.atlassian.net/browse/".$epicKey;
+
+
+while ($ticket = $tickets->fetch_object())
+{
+    $jiraClass->set_story_postfields($ticket->title, $projectKey,$ticket->description);
+    $story_log = $jiraClass->jira_story_create();
+    $story_log = json_encode($story_log);
+    $story_log = mysqli_real_escape_string($dbconn, $story_log);
+//    var_dump($story_log);
+    $log = log_request($managerName, $newhire, $ticket->id, $story_log, $dbconn );
+
 }
 
-else{
-    //redirect to error page
-    header('Location: error.php');
 
-}
 ?>
 <?php
 
