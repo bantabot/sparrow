@@ -1,7 +1,8 @@
 <?php
 
-include 'mysql_connection.php';
+
 include 'function.php';
+include 'config.php';
 
 //Get POST variables
 

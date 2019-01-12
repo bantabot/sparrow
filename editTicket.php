@@ -1,11 +1,18 @@
 <?php
 
-include 'mysql_connection.php';
+
 include 'function.php';
+include 'model/Ticket.php';
+include 'config.php';
 $id = $_GET['id'];
-if (isset($id)){
-$ticket = get_tickets_id($dbconn, $id);
-$ticket = $ticket->fetch_object();}
+if (isset($id))
+{
+    $ticket = new Ticket;
+    $ticket->set_dbconn($dbconn);
+    $ticket->set_id($id);
+    $ticket = $ticket->get_ticket_by_id();
+}
+
 
 $header= "Jay is great";
 include 'view/header.php';
@@ -50,7 +57,7 @@ include 'view/header.php';
             <label for="assignee">Assignee</label>
             <select class="form-control" id="assignee" name="ticketAssignee">
                 <option value="manager" <?php if($ticket->assignee=="manager"){ echo "selected";}?>>Manager</option>
-                <option value="new-hire"<?php if($ticket->group_name=="new-hire"){ echo "selected";}?>>New Hire</option>
+                <option value="new-hire"<?php if($ticket->assignee=="new-hire"){ echo "selected";}?>>New Hire</option>
             </select>
         </div>
         <input type="hidden" name="ID" value="<?php echo $id;?>">

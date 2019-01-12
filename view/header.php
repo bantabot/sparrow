@@ -39,7 +39,7 @@
             <a class="nav-link" href="templateView.php">View tickets</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="editTicket.php">Add a ticket</a>
+            <a class="nav-link" href="addTicket.php">Add a ticket</a>
         </li>
     </ul>
 </div>

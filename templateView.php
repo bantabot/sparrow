@@ -1,8 +1,9 @@
 <?php
 
-include 'mysql_connection.php';
+
 include 'function.php';
 include 'view/header.php';
+include 'config.php';
 
 ?>
 

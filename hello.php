@@ -8,7 +8,7 @@ include 'view/header.php';
 
 <!------------------Begin Form---------------------->
     <div class="container">
-        <form action="success.php" method="post">
+        <form action="successController.php" method="post">
 
         <!------------------ Get jira username-------------->
 

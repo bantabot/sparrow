@@ -1,16 +1,25 @@
 <?php
 
-include 'mysql_connection.php';
+
 include 'function.php';
+include 'model/Ticket.php';
+include 'config.php';
 
 //---------Define global variables------------
+$ticket = new Ticket;
+$ticket->set_dbconn($dbconn);
 
-$title = mysqli_real_escape_string($dbconn,$_POST['ticketTitle']);
-$description = mysqli_real_escape_string($dbconn, $_POST['ticketDescription'] );
-$groupName = mysqli_real_escape_string($dbconn, $_POST['group']);
-$assignee = mysqli_real_escape_string($dbconn,$_POST['ticketAssignee']);
+$title = $_POST['ticketTitle'];
+$description = $_POST['ticketDescription'];
+$groupName = $_POST['group'];
+$assignee = $_POST['ticketAssignee'];
 $id = $_POST['ID'];
+$ticket->set_id($id);
+
 $delete = $_POST['delete'];
+
+$ticket->set_ticket($title,$description,$assignee,$groupName);
+
 
 include 'view/header.php';
 
@@ -20,16 +29,16 @@ include 'view/header.php';
         <?php
 
         if (isset($delete)){
-            $delete = $delete($id, $dbconn);
-            echo '<p class="text-center">' . $delete . ' </p>';
+            $ticket->delete();
+            echo '<p class="text-center">Ticket is deleted</p>';
         }
           elseif ($id>0){
-            $update = update($title, $description, $groupName, $assignee, $id, $dbconn);
-            echo '<p class="text-center">' . $update . ' </p>';
+            $ticket->update();
+            echo '<p class="text-center">ticket has been updated</p>';
         }
         else {
-            $saveMessage = save($title, $description, $groupName, $assignee, $dbconn);
-            echo '<p class="text-center">' . $saveMessage . ' </p>';
+            $ticket->save();
+            echo '<p class="text-center">Ticket Added </p>';
         }
         echo '<p class="text-center"> Click <a href="templateView.php"> here </a> to add another';
 
