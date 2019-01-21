@@ -3,8 +3,8 @@
 include 'config.php';
 include 'function.php';
 include 'jira.php';
-//include 'model/Logger.php';
-//include 'model/Ticket.php';
+include 'model/Logger.php';
+include 'model/Ticket.php';
 
 
 // ---------------Define variables  ----------------------------

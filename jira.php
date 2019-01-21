@@ -1,4 +1,5 @@
 <?php
+require 'vendor/autoload.php';
 
 
 class jira extends requester
@@ -14,6 +15,8 @@ class jira extends requester
     private $storyCreateResponse = null;
     private $isAuth = false;
     private $username = "";
+    private $password = "";
+    private $response = null;
 
     
     function set_jira_url()
@@ -34,6 +37,7 @@ class jira extends requester
     function set_jira_auth($username, $password)
     {
         $this->username = $username;
+        $this->password = $password;
         $this->auth = $username . ":" . $password;
         $this->auth = base64_encode($this->auth);
         return $this->auth;
@@ -93,6 +97,22 @@ class jira extends requester
         $this->authCheckResponse = $this->make_jira_call();
         $this->authCheckResponse  = json_decode($this->authCheckResponse, true);
         if ($this->authCheckResponse['name'] == $this->username)
+        {
+            $this->isAuth = true;
+        }
+        return $this->authCheckResponse;
+
+    }
+
+    function guzzle_jira_auth_check()
+    {
+        $client = new GuzzleHttp\Client();
+        $this->response = $client->get('https://rsglab.atlassian.net/rest/api/3/myself', [
+            'auth' => [$this->username, $this->password]
+        ]);
+        $body = $this->response->getBody();
+        $this->authCheckResponse = json_decode($body);
+        if ($this->authCheckResponse->name == $this->username)
         {
             $this->isAuth = true;
         }
