@@ -1,8 +1,9 @@
 <?php
 require 'vendor/autoload.php';
+include_once 'requester.php';
 
 
-class jira extends requester
+class jira extends AliRequester
 {
     private $url = "";
     private $action = "";
@@ -56,7 +57,7 @@ class jira extends requester
     {
         $description = json_encode($description);
         $epicKey = $this->epicCreateResponse['key'];
-        $this->storyPostfields = "{\n\t\"fields\": {\n\n\t\t\"summary\": \"" . $summary . "\",\n\t\t\"issuetype\": {\n\t\t\t\"id\": \"10001\"\n\t\t},\n\t\t\"project\": {\n\t\t\t\"key\": \"$projectKey\"\n\n\t\t},\n\t\t\"description\": {\n\t\t\t\"version\": 1,\n\t\t\t\"type\": \"doc\",\n\t\t\t\"content\": [{\n\t\t\t\t\"type\": \"paragraph\",\n\t\t\t\t\"content\": [{\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": " . $description . "\n\t\t\t\t}]\n\t\t\t}]\n\t\t},\n\t\t\"customfield_10008\": \"" . $epicKey . "\"\n\t}\n}";
+        $this->storyPostfields = "{\"fields\": {\"summary\": \"".$summary."\", \"issuetype\": {\"id\": \"10001\"},\"project\": {\"key\": \"".$projectKey."\"},\"description\": ".$description.",\"customfield_10008\": \"".$epicKey."\"}}";
         return $this->storyPostfields;
 
 
@@ -89,9 +90,10 @@ class jira extends requester
 
 
 
+
     function jira_auth_check()
     {
-        $this->url = "https://rsglab.atlassian.net/rest/api/3/myself";
+        $this->url = "https://jira.mailchimp.com/rest/api/latest/myself";
         $this->action = "GET";
         $this->postfields = "";
         $this->authCheckResponse = $this->make_jira_call();
@@ -101,28 +103,12 @@ class jira extends requester
             $this->isAuth = true;
         }
         return $this->authCheckResponse;
-
     }
 
-    function guzzle_jira_auth_check()
-    {
-        $client = new GuzzleHttp\Client();
-        $this->response = $client->get('https://rsglab.atlassian.net/rest/api/3/myself', [
-            'auth' => [$this->username, $this->password]
-        ]);
-        $body = $this->response->getBody();
-        $this->authCheckResponse = json_decode($body);
-        if ($this->authCheckResponse->name == $this->username)
-        {
-            $this->isAuth = true;
-        }
-        return $this->authCheckResponse;
-
-    }
 
     function jira_epic_create()
     {
-        $this->url  = "https://rsglab.atlassian.net/rest/api/2/issue";
+        $this->url  = "https://jira.mailchimp.com/rest/api/latest/issue";
         $this->action = "POST";
         $this->postfields = $this->epicPostfields;
 
@@ -147,7 +133,7 @@ class jira extends requester
 
     function jira_story_create()
     {
-        $this->url = "https://rsglab.atlassian.net/rest/api/3/issue";
+        $this->url = "https://jira.mailchimp.com/rest/api/latest/issue";
         $this->action = "POST";
         $this->postfields = $this->storyPostfields;
 

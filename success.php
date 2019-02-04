@@ -2,7 +2,7 @@
 <?php
 
 include 'view/header.php';
-$epicLink = "https://rsglab.atlassian.net/browse/".$_GET['key'];
+$epicLink = "https://jira.mailchimp.com/browse/".$_GET['key'];
 
 ?>
 

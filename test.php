@@ -11,9 +11,7 @@ require 'vendor/autoload.php';
 
 
 
-$storyUrl = "https://rsglab.atlassian.net/rest/api/3/issue";
-$authUrl = "https://rsglab.atlassian.net/rest/api/3/myself";
-$epicUrl= "https://rsglab.atlassian.net/rest/api/2/issue";
+
 
 $groups = "engineering";
 
@@ -38,15 +36,16 @@ $groups = "engineering";
 $testJiraClass = new Jira;
 //
 $testJiraClass->set_jira_auth($username, $password);
-$response = $testJiraClass->guzzle_jira_auth_check();
+$response = $testJiraClass->jira_auth_check();
 $isAuth = $testJiraClass->get_isAuth();
-var_dump($isAuth);
-//$authdump = $testJiraClass->jira_auth_check();
-//
-//$testJiraClass->set_epic_postfields($summary, $projectKey, $description);
-//$epictime = $testJiraClass->jira_epic_create();
-//$testJiraClass->set_story_postfields($storySummary, $projectKey, $storyDescription);
+
+$testJiraClass->set_epic_postfields($summary, $projectKey, $description);
+$epictime = $testJiraClass->jira_epic_create();
+
+
+$postfields = $testJiraClass->set_story_postfields($storySummary, $projectKey, $storyDescription);
 //$storyTime = $testJiraClass->jira_story_create();
+var_dump($postfields);
 //
 //$testDBfunctions = new Ticket;
 //$testDBfunctions->set_dbconn($dbconn);

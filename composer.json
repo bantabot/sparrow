@@ -1,7 +1,11 @@
 {
   "require": {
     "monolog/monolog": "1.0.*",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "phpunit/phpunit": "^7.5"
   },
+  "scripts": {
+    "test": "./vendor/bin/phpunit"
+  }
 
 }

@@ -12,9 +12,9 @@ include 'model/Ticket.php';
 
 //get username and password and encode it to use in API calls
 
-
-$username = $_POST['username'];
-$password = $_POST['password'];
+//
+//$username = $username;
+//$password = $password;
 $managerName = $_POST['managerName'];
 $newhire = $_POST['newHire'];
 
