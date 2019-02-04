@@ -2,7 +2,7 @@
 
 
 include 'function.php';
-include 'config.php';
+include 'config/config.php';
 
 //Get POST variables
 

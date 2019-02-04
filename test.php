@@ -1,7 +1,7 @@
 <?php
 
 include 'function.php';
-include 'config.php';
+include 'config/config.php';
 include 'jira.php';
 //include 'dbfunctions.php';
 require 'vendor/autoload.php';

@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include 'config/config.php';
 include 'function.php';
 include 'jira.php';
 include 'model/Logger.php';

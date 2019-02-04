@@ -3,7 +3,7 @@
 
 include 'function.php';
 include 'view/header.php';
-include 'config.php';
+include 'config/config.php';
 
 ?>
 
