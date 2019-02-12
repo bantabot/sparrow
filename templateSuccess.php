@@ -13,10 +13,17 @@ $title = $_POST['ticketTitle'];
 $description = $_POST['ticketDescription'];
 $groupName = $_POST['group'];
 $assignee = $_POST['ticketAssignee'];
-$id = $_POST['ID'];
-$ticket->set_id($id);
 
-$delete = $_POST['delete'];
+if (isset($_POST['id'])) {
+    $id = $_POST['ID'];
+    $ticket->set_id($id);
+    }
+else {
+    $id = 0;
+    }
+if (isset($_POST['delete'])){
+    $delete = $_POST['delete'];
+    }
 
 $ticket->set_ticket($title,$description,$assignee,$groupName);
 
