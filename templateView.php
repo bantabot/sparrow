@@ -1,9 +1,10 @@
 <?php
 
 
-include 'function.php';
+
 include 'view/header.php';
 include 'config/config.php';
+include 'model/Ticket.php';
 
 ?>
 
@@ -15,11 +16,13 @@ include 'config/config.php';
         <form action="ticketView.php" method="post">
 
         <?php
-        $groups = get_groups($dbconn);
-        foreach ($groups as $group){
+        $groups = new Ticket;
+        $groups->set_dbconn($dbconn);
+        $groups = $groups->get_group_names();
+         foreach ($groups as $group){
             echo ' <div class="form-check">';
-            echo '<input type="checkbox" class="form-check-input" id="group" name="'.$group['group_name'].'">';
-           echo '<label class="form-check-label" for="group">'.ucwords($group['group_name']).'</label>  </div>';
+           echo '<input type="checkbox" class="form-check-input" id="group" name="'.$group.'">';
+           echo '<label class="form-check-label" for="group">'.ucwords($group).'</label>  </div>';
         }
 
         ?>

@@ -1,7 +1,7 @@
 <?php
 
 include 'config/config.php';
-include 'function.php';
+
 include 'jira.php';
 include 'model/Logger.php';
 include 'model/Ticket.php';
@@ -59,7 +59,10 @@ $authCheck = $jiraClass->jira_auth_check();
 $jiraClass->set_epic_postfields($summary, $projectKey, $description);
 $epic = $jiraClass->jira_epic_create();
 
-$tickets = get_tickets($dbconn, $groups);
+$tickets = new Ticket;
+$tickets->set_dbconn($dbconn);
+$tickets->set_groups($groups);
+$tickets = $tickets->get_ticket_by_group();
 $logger = new Logger;
 $logger->set_dbconn($dbconn);
 

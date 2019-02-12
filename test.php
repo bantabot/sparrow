@@ -1,6 +1,6 @@
 <?php
 
-include 'function.php';
+
 include 'config/config.php';
 include 'jira.php';
 //include 'dbfunctions.php';

@@ -1,7 +1,7 @@
 <?php
 
 
-include 'function.php';
+
 include 'model/Ticket.php';
 include 'config/config.php';
 
@@ -14,7 +14,7 @@ $description = $_POST['ticketDescription'];
 $groupName = $_POST['group'];
 $assignee = $_POST['ticketAssignee'];
 
-if (isset($_POST['id'])) {
+if (isset($_POST['ID'])) {
     $id = $_POST['ID'];
     $ticket->set_id($id);
     }

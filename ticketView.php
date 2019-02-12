@@ -1,7 +1,7 @@
 <?php
 
 
-include 'function.php';
+include 'model/Ticket.php';
 include 'config/config.php';
 
 //Get POST variables
@@ -11,7 +11,10 @@ foreach ($_POST as $key => $value){
     $groups[] = $key;
 }
 $groups = implode("', '", $groups);
-$tickets = get_tickets($dbconn, $groups);
+$tickets = new Ticket;
+$tickets->set_dbconn($dbconn);
+$tickets->set_groups($groups);
+$tickets = $tickets->get_ticket_by_group();
 
 include 'view/header.php';
 

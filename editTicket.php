@@ -1,7 +1,7 @@
 <?php
 
 
-include 'function.php';
+
 include 'model/Ticket.php';
 include 'config/config.php';
 $id = $_GET['id'];
