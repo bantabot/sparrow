@@ -77,7 +77,7 @@ class Ticket
 
     function get_group_names()
     {
-        $sql ="SELECT group_name FROM templates GROUP BY group_name";
+        $sql ="SELECT group_name FROM templates WHERE visible='true' GROUP BY group_name";
         $this->result = mysqli_query($this->dbconn, $sql);
         $this->groupNames = mysqli_fetch_array($this->result, MYSQLI_ASSOC);
         while ($group = $this->result->fetch_assoc()) {
