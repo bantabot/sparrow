@@ -20,6 +20,9 @@ $newhire = $_POST['newHire'];
 
 $jiraClass = new Jira ;
 
+$description = "We heavily use Atlassian JIRA at MailChimp as a way to keep track of the different work status and communicate in an asynchronous fashion. This onboarding JIRA series aims at providing guidance around how to organize your time during your onboarding at MailChimp. We encourage you to use the JIRA features to keep track of your progress (via the ticket workflow) and communicate (using JIRA comments with wiki syntax) with your manager and colleagues. Welcome to Mailchimp  ".$newhire."!!!";
+$summary = "Onboarding for  ".$newhire;
+
 
 //Set group to have at least the engineering group
 $groups = ['engineering'];
