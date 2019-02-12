@@ -20,17 +20,7 @@ Install MAMP version 5.0. See installation instructions [here](https://www.mamp.
 
 3) Create a config directory, with config.php
 
-    This file needs to include something like this:
-    
-    ```
-       $username = "";
-       $password = "";
-       DEFINE ('DB_USER', 'your_db_username');
-       DEFINE ('DB_PSWD', 'your_db_password');
-       DEFINE ('DB_HOST','127.0.0.1:your_port_number');
-       DEFINE ('DB_NAME', 'your_db_name');
-       
-       $dbconn = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME);
+    Make a copy of sample-config.php and fill in your DB credentials as seen in the MAMP WedStart page under MySQL
       
        Note: the username and password must be filled in, for credentials see Ali Banta and they will be shared via LastPass
 

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99aa8df1-bf4c-4a4e-b3d5-47f8de272472" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/successController.php" beforeDir="false" afterPath="$PROJECT_DIR$/successController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,20 +42,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="330">
+                <caret line="22" column="89" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="success.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/success.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
               <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="templateSuccess.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templateSuccess.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -71,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="successController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="successController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/successController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+            <state relative-caret-position="795">
+              <caret line="51" column="19" lean-forward="true" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -176,13 +177,13 @@
         <option value="$PROJECT_DIR$/templateView.php" />
         <option value="$PROJECT_DIR$/editTicket.php" />
         <option value="$PROJECT_DIR$/dbstart.php" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/dbstart.sql" />
         <option value="$PROJECT_DIR$/jira.php" />
         <option value="$PROJECT_DIR$/sample-config.php" />
         <option value="$PROJECT_DIR$/templateSuccess.php" />
         <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/successController.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -380,12 +381,12 @@
       <workItem from="1541691349995" duration="20789000" />
       <workItem from="1544451462925" duration="29541000" />
       <workItem from="1545066784260" duration="88164000" />
-      <workItem from="1549990854020" duration="4434000" />
+      <workItem from="1549990854020" duration="4768000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186134000" />
+    <option name="totallyTimeSpent" value="186468000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2521" y="23" width="1703" height="1337" extended-state="0" />
@@ -401,10 +402,10 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.17983872" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.17983872" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8692232" visible="true" weight="0.09452137" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8692232" visible="true" weight="0.09452137" />
       <window_info anchor="right" id="Database" order="3" weight="0.35746607" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -676,16 +677,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dbstart.php" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="542">
-            <caret line="37" column="46" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dbstart.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="887">
@@ -728,13 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hello.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jira.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -756,10 +740,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hello.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/successController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        <state relative-caret-position="795">
+          <caret line="51" column="19" lean-forward="true" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="330">
+            <caret line="22" column="89" selection-start-line="22" selection-start-column="89" selection-end-line="22" selection-end-column="89" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
