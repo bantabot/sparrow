@@ -60,7 +60,8 @@ $jiraClass->set_epic_postfields($summary, $projectKey, $description);
 $epic = $jiraClass->jira_epic_create();
 
 $tickets = get_tickets($dbconn, $groups);
-
+$logger = new Logger;
+$logger->set_dbconn($dbconn);
 
 
 while ($ticket = $tickets->fetch_object())
@@ -69,7 +70,7 @@ while ($ticket = $tickets->fetch_object())
     $story_log = $jiraClass->jira_story_create();
     $story_log = json_encode($story_log);
     $story_log = mysqli_real_escape_string($dbconn, $story_log);
-    $log = log_request($managerName, $newhire, $ticket->id, $story_log, $dbconn );
+    $log = $logger->log_request($managerName, $newhire, $ticket->id, $story_log);
 
 }
 
