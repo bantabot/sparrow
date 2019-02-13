@@ -1,6 +1,20 @@
 <?php
+include 'config/config.php';
 $header = "All Aboard, a tool to make onboarding a little bit lighter";
 include 'view/header.php';
+
+
+
+$sql ="SELECT * FROM ticketGroup";
+$ticketGroup = mysqli_query($dbconn, $sql);
+//$ticketGroupArray = mysqli_fetch_array($ticketGroup, MYSQLI_ASSOC);
+while ($group = mysqli_fetch_assoc($ticketGroup)) {
+    $groups[$group['id']] = $group['name'];
+//    var_dump($group);
+}
+
+
+var_dump($groups);
 
 ?>
 
@@ -29,9 +43,12 @@ include 'view/header.php';
             <div class="form-group">
                 <label for="group">What group are they in?</label>
                 <select class="form-control" id="group" name="group">
-                    <option>Development</option>
-                    <option>Ops</option>
-                    <option>Front-End</option>
+                    <?php
+                    foreach ($groups as $groupKey => $groupName){
+                        echo "<option>".$groupName."</option>";
+
+                    }
+                    ?>
                 </select>
             </div>
 
