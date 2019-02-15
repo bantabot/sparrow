@@ -112,7 +112,9 @@ class Ticket
     function delete()
     {
         $sql = "UPDATE `templates` SET `visible`= 'false' WHERE `templates`.`id` = $this->id";
+
         $this->result= mysqli_query($this->dbconn, $sql);
+        $this->result = mysqli_error($this->dbconn);
         return $this->result;
 
 

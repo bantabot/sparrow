@@ -4,48 +4,52 @@
 
 include 'model/Ticket.php';
 include 'config/config.php';
-
-//---------Define global variables------------
-$ticket = new Ticket;
-$ticket->set_dbconn($dbconn);
-
-$title = $_POST['ticketTitle'];
-$description = $_POST['ticketDescription'];
-$groupName = $_POST['group'];
-$assignee = $_POST['ticketAssignee'];
-
-if (isset($_POST['ID'])) {
-    $id = $_POST['ID'];
-    $ticket->set_id($id);
-    }
-else {
-    $id = 0;
-    }
-if (isset($_POST['delete'])){
-    $delete = $_POST['delete'];
-    }
-
-$ticket->set_ticket($title,$description,$assignee,$groupName);
-
-
 include 'view/header.php';
+include 'ticketController.php';
+//---------Define global variables------------
+//$ticket = new Ticket;
+//$ticket->set_dbconn($dbconn);
+//
+//$title = $_POST['ticketTitle'];
+//$description = $_POST['ticketDescription'];
+//$groupName = $_POST['group'];
+//$assignee = $_POST['ticketAssignee'];
+//
+//if (isset($_POST['ID'])) {
+//    $id = $_POST['ID'];
+//    $ticket->set_id($id);
+//    }
+//else {
+//    $id = 0;
+//    }
+//if (isset($_POST['delete'])){
+//    $delete = $_POST['delete'];
+//    }
+//
+//$ticket->set_ticket($title,$description,$assignee,$groupName);
+
+//var_dump($title,$description,$assignee,$groupName);
+
 
 ?>
 
     <div class="container">
         <?php
 
-        if (isset($delete)){
-            $ticket->delete();
+        if ($delete){
             echo '<p class="text-center">Ticket is deleted</p>';
         }
-          elseif ($id>0){
-            $ticket->update();
+          elseif ($update){
+
             echo '<p class="text-center">ticket has been updated</p>';
         }
-        else {
-            $ticket->save();
+        elseif ($save) {
+
             echo '<p class="text-center">Ticket Added </p>';
+        }
+        else{
+            echo '<p class="text-center">Try Again!</p>';
+
         }
         echo '<p class="text-center"> Click <a href="templateView.php"> here </a> to add another';
 

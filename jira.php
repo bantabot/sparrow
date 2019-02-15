@@ -3,7 +3,7 @@
 include_once 'requester.php';
 
 
-class jira extends AliRequester
+class jira extends Requester
 {
     private $url = "";
     private $action = "";

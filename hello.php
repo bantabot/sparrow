@@ -1,21 +1,7 @@
 <?php
-include 'config/config.php';
-$header = "All Aboard, a tool to make onboarding a little bit lighter";
+
 include 'view/header.php';
-
-
-
-$sql ="SELECT * FROM ticketGroup";
-$ticketGroup = mysqli_query($dbconn, $sql);
-//$ticketGroupArray = mysqli_fetch_array($ticketGroup, MYSQLI_ASSOC);
-while ($group = mysqli_fetch_assoc($ticketGroup)) {
-    $groups[$group['id']] = $group['name'];
-//    var_dump($group);
-}
-
-
-var_dump($groups);
-
+include 'groupController.php';
 ?>
 
 

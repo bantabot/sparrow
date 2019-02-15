@@ -1,20 +1,7 @@
 <?php
 
-
-
-include 'model/Ticket.php';
-include 'config/config.php';
-$id = $_GET['id'];
-if (isset($id))
-{
-    $ticket = new Ticket;
-    $ticket->set_dbconn($dbconn);
-    $ticket->set_id($id);
-    $ticket = $ticket->get_ticket_by_id();
-}
-
-
-$header= "Jay is great";
+include 'groupController.php';
+include 'ticketController.php';
 include 'view/header.php';
 
 ?>
@@ -43,10 +30,20 @@ include 'view/header.php';
             <label for="group">Group label</label>
             <select class="form-control" id="group" name="group">
                 <option value="">Select...</option>
-                <option value="engineering" <?php if($ticket->group_name=="engineering"){ echo "selected";}?> >Engineering</option>
-                <option value="development" <?php if($ticket->group_name=="development"){ echo "selected";}?> >Development</option>
-                <option value="ops" <?php if($ticket->group_name=="ops"){ echo "selected";}?> >Ops</option>
-                <option value="front-end"<?php if($ticket->group_name=="front-end"){ echo "selected";}?>>Front-End</option>
+              <?php
+
+                    foreach ($groups as $groupKey => $groupName){
+
+                    if( strtolower($ticket->group_name) == strtolower($groupName)){
+                        echo '<option value="' . $ticket->group_name . '" selected>' . $groupName . '</option>';
+                    }
+                    else {
+                        echo '<option value="' . $groupName . '">' . $groupName . '</option>';
+                    }
+
+
+                }
+                ?>
             </select>
         </div>
 
@@ -61,6 +58,7 @@ include 'view/header.php';
             </select>
         </div>
         <input type="hidden" name="ID" value="<?php echo $id;?>">
+        <input type="hidden" name="action" value="update">
 
         <!------------------Submit------------------>
 
