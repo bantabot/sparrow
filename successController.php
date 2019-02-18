@@ -4,6 +4,7 @@ include 'config/config.php';
 include 'jira.php';
 include 'model/Logger.php';
 include 'model/Ticket.php';
+include 'model/TicketGroup.php';
 
 
 // ---------------Define variables  ----------------------------
@@ -16,6 +17,7 @@ include 'model/Ticket.php';
 //$password = $password;
 $managerName = $_POST['managerName'];
 $newhire = $_POST['newHire'];
+$groupId = $_POST['group'];
 
 $jiraClass = new Jira ;
 
@@ -25,25 +27,11 @@ $projectKey = "DC";
 
 
 //Set group to have at least the engineering group
-$groups = ['engineering'];
-
-//depending on the value from the form, this may need more tickets to be added
-
-switch ($_POST['group']) {
-    case 'Development':
-        $groups[] = 'development';
-        break;
-    case 'Front-End':
-        $groups[] = 'front-end';
-        $groups[] = 'development';
-        break;
-    case 'ops':
-        $groups[] = 'ops';
-        break;
-}
-
-//implode $groups to get ready to be used in a query
+$groups = new TicketGroup;
+$groups->set_dbconn($dbconn);
+$groups = $groups->set_group_family($groupId);
 $groups = implode("', '", $groups);
+
 
 // -----------------------end of grabbing global variables-----------------------
 
@@ -85,6 +73,6 @@ if (!$jiraClass->get_isAuth())
 else
 {
     $epicKey = $jiraClass->get_epic_key();
-    header('Location: success.php?key='.$epicKey);
+
 }
 

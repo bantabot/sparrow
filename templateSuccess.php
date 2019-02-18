@@ -6,29 +6,7 @@ include 'model/Ticket.php';
 include 'config/config.php';
 include 'view/header.php';
 include 'ticketController.php';
-//---------Define global variables------------
-//$ticket = new Ticket;
-//$ticket->set_dbconn($dbconn);
-//
-//$title = $_POST['ticketTitle'];
-//$description = $_POST['ticketDescription'];
-//$groupName = $_POST['group'];
-//$assignee = $_POST['ticketAssignee'];
-//
-//if (isset($_POST['ID'])) {
-//    $id = $_POST['ID'];
-//    $ticket->set_id($id);
-//    }
-//else {
-//    $id = 0;
-//    }
-//if (isset($_POST['delete'])){
-//    $delete = $_POST['delete'];
-//    }
-//
-//$ticket->set_ticket($title,$description,$assignee,$groupName);
 
-//var_dump($title,$description,$assignee,$groupName);
 
 
 ?>

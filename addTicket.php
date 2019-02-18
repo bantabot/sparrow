@@ -1,6 +1,7 @@
 <?php
-
+include 'groupController.php';
 include 'view/header.php';
+
 
 ?>
 
@@ -27,11 +28,12 @@ include 'view/header.php';
             <div class="form-group">
                 <label for="group">Group label</label>
                 <select class="form-control" id="group" name="group">
-                    <option value="">Select...</option>
-                    <option value="engineering" >Engineering</option>
-                    <option value="development" >Development</option>
-                    <option value="ops" >Ops</option>
-                    <option value="front-end">Front-End</option>
+                    <?php
+                    foreach ($groups as $groupKey => $groupName){
+                        echo "<option value=' ".$groupKey."'>".$groupName."</option>";
+
+                    }
+                    ?>
                 </select>
             </div>
 

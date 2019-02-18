@@ -8,7 +8,7 @@ include 'groupController.php';
 
 <!------------------Begin Form---------------------->
     <div class="container">
-        <form action="successController.php" method="post">
+        <form action="success.php" method="post">
 
         <!--Manager Name-->
 
@@ -31,7 +31,7 @@ include 'groupController.php';
                 <select class="form-control" id="group" name="group">
                     <?php
                     foreach ($groups as $groupKey => $groupName){
-                        echo "<option>".$groupName."</option>";
+                        echo "<option value=' ".$groupKey."'>".$groupName."</option>";
 
                     }
                     ?>
