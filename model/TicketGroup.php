@@ -22,11 +22,61 @@ class TicketGroup
         return $groups;
     }
 
+    function set_group_family($id)
+    {
+        //set initial group
+        $child = $this->get_group_by_id($id);
+        $family[$child['id']] = $child['name'];
+
+        //find if the group from the first id has a parent
+        $parent = $this->get_group_parent($id);
+
+        //if that group has a parent add to array and find the next one
+        if ($parent != null){
+          do {
+              $family[$parent['id']] = $parent['name'];
+              $parent = $this->get_group_parent($parent['id']);
+          } while ($parent != null);
+
+        }
+
+        return $family;
+
+    }
+
+    function get_group_parent($id)
+    {
+       $group = $this->get_group_by_id($id);
+
+
+        $parentId = $group['parentId'];
+
+        if($group['parentId'] != 0) {
+            $sql = "SELECT * FROM ticketGroup WHERE id=$parentId AND visible='true'";
+            $groups = mysqli_query($this->dbconn, $sql);
+                  $child = mysqli_fetch_assoc($groups);
+        }
+        else{
+            $child = null;
+        }
+
+        return $child;
+    }
+
     function save()
     {
         $sql = "INSERT INTO ticketGroup (`name`, `parentId`) VALUES ('$this->name', '$this->parentId')";
         $result = mysqli_query($this->dbconn, $sql);
         return $result;
 
+    }
+
+    function get_group_by_id($id)
+    {
+        $sql = "SELECT * FROM ticketGroup WHERE id=$id AND visible='true'";
+        $ticketGroup = mysqli_query($this->dbconn, $sql);
+        $group = mysqli_fetch_assoc($ticketGroup);
+
+        return $group;
     }
 }
