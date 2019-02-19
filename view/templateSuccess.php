@@ -2,10 +2,10 @@
 
 
 
-include 'model/Ticket.php';
-include 'config/config.php';
-include 'view/header.php';
-include 'ticketController.php';
+include '../model/Ticket.php';
+include '../config/config.php';
+include '../view/header.php';
+include '../controller/ticketController.php';
 
 
 
@@ -34,6 +34,6 @@ include 'ticketController.php';
         ?>
     </div>
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>
 
 

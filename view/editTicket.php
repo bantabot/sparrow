@@ -1,8 +1,8 @@
 <?php
 
-include 'groupController.php';
-include 'ticketController.php';
-include 'view/header.php';
+include '../controller/groupController.php';
+include '../controller/ticketController.php';
+include '../view/header.php';
 
 ?>
 
@@ -63,10 +63,10 @@ include 'view/header.php';
         <!------------------Submit------------------>
 
         <button type="submit" name="submit" class="btn btn-secondary text-center">Magic Time</button>
-        <?php if (isset($id)){echo '<button type="submit" name="delete"  value="delete" class="btn btn-secondary text-center">DELETE</button>';}?>
+        <?php if (isset($id)){echo '<button type="submit" name="action"  value="delete" class="btn btn-secondary text-center">DELETE</button>';}?>
 
     </form>
 </div>
 
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

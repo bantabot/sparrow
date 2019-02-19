@@ -1,22 +1,9 @@
 <?php
 
 
-include 'model/Ticket.php';
-include 'config/config.php';
-
-//Get POST variables
-
-$groups = [];
-foreach ($_POST as $key => $value){
-    $groups[] = $key;
-}
-$groups = implode("', '", $groups);
-$tickets = new Ticket;
-$tickets->set_dbconn($dbconn);
-$tickets->set_groups($groups);
-$tickets = $tickets->get_ticket_by_group();
-
-include 'view/header.php';
+include '../config/config.php';
+include '../controller/ticketController.php';
+include '../view/header.php';
 
 ?>
 
@@ -26,7 +13,6 @@ include 'view/header.php';
 
 
             <?php
-
 
             while ($ticket = $tickets->fetch_object()) {
                 echo '<div class="card">';
@@ -45,4 +31,4 @@ include 'view/header.php';
 </div>
 
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

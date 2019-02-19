@@ -1,7 +1,7 @@
 <?php
 
-include 'view/header.php';
-include 'groupController.php';
+include '../view/header.php';
+include '../controller/groupController.php';
 ?>
 
 
@@ -47,4 +47,4 @@ include 'groupController.php';
 <!--End Form-->
 
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

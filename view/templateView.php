@@ -1,7 +1,7 @@
 <?php
 
-include 'groupController.php';
-include 'view/header.php';
+include '../controller/groupController.php';
+include '../view/header.php';
 
 ?>
 
@@ -16,11 +16,13 @@ include 'view/header.php';
 
             foreach ($groups as $groupKey => $groupName){
                 echo ' <div class="form-check">';
-                echo '<input type="checkbox" class="form-check-input" id="group" name="'.$groupName.'">';
+                echo '<input type="checkbox" class="form-check-input" id="group"  name="'.$groupKey.'" value="'.$groupName.'">';
                 echo '<label class="form-check-label" for="group">'.ucwords($groupName).'</label>  </div>';
 
                 }
             ?>
+            <input type="hidden" name="action" value="view">
+
             <button type="submit" class="btn btn-primary">Magic Time</button>
         </form>
 
@@ -28,4 +30,4 @@ include 'view/header.php';
     </div>
 </div>
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

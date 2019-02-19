@@ -1,6 +1,6 @@
 <?php
-include 'groupController.php';
-include 'view/header.php';
+include '../controller/groupController.php';
+include '../view/header.php';
 
 
 ?>
@@ -50,10 +50,11 @@ include 'view/header.php';
 
 
             <!------------------Submit------------------>
+            <input type="hidden" name="action" value="save">
             <button type="submit" name="submit" class="btn btn-secondary text-center">Magic Time</button>
 
         </form>
     </div>
 
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

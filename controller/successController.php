@@ -1,20 +1,14 @@
 <?php
 
-include 'config/config.php';
-include 'jira.php';
-include 'model/Logger.php';
-include 'model/Ticket.php';
-include 'model/TicketGroup.php';
+include '../config/config.php';
+include '../jira.php';
+include '../model/Logger.php';
+include '../model/Ticket.php';
+include '../model/TicketGroup.php';
 
 
 // ---------------Define variables  ----------------------------
 
-
-//get username and password and encode it to use in API calls
-
-//
-//$username = $username;
-//$password = $password;
 $managerName = $_POST['managerName'];
 $newhire = $_POST['newHire'];
 $groupId = $_POST['group'];
