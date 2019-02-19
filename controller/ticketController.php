@@ -72,7 +72,11 @@ if (isset($_GET['id']))
 {
     $id = $_GET['id'];
     $ticket->set_id($id);
-    $ticket = $ticket->get_ticket_by_id();
+    $tickets = $ticket->get_ticket_by_id();
+    $ticketTitle = $ticket->get_title();
+    $ticketDescription = $ticket->get_description();
+    $ticketAssignee = $ticket->get_assignee();
+    $ticketGroup = $ticket->get_group_name();
 }
 
 

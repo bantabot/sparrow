@@ -15,14 +15,14 @@ include '../view/header.php';
 
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="ticketTitle" value="<?php echo $ticket->title; ?>">
+            <input type="text" class="form-control" id="title" name="ticketTitle" value="<?php echo $ticketTitle; ?>">
         </div>
 
         <!------------------Enter Description----------------->
 
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="ticketDescription" rows="3" ><?php echo $ticket->description; ?></textarea>
+            <textarea class="form-control" id="description" name="ticketDescription" rows="3" ><?php echo $ticketDescription; ?></textarea>
         </div>
 
         <!------------------Get Group Name------------------>
@@ -34,8 +34,8 @@ include '../view/header.php';
 
                     foreach ($groups as $groupKey => $groupName){
 
-                    if( strtolower($ticket->group_name) == strtolower($groupName)){
-                        echo '<option value="' . $ticket->group_name . '" selected>' . $groupName . '</option>';
+                    if( strtolower($ticketGroup) == strtolower($groupName)){
+                        echo '<option value="' . $ticketGroup . '" selected>' . $groupName . '</option>';
                     }
                     else {
                         echo '<option value="' . $groupName . '">' . $groupName . '</option>';
@@ -53,8 +53,8 @@ include '../view/header.php';
         <div class="form-group">
             <label for="assignee">Assignee</label>
             <select class="form-control" id="assignee" name="ticketAssignee">
-                <option value="manager" <?php if($ticket->assignee=="manager"){ echo "selected";}?>>Manager</option>
-                <option value="new-hire"<?php if($ticket->assignee=="new-hire"){ echo "selected";}?>>New Hire</option>
+                <option value="manager" <?php if($ticketAssignee=="manager"){ echo "selected";}?>>Manager</option>
+                <option value="new-hire"<?php if($ticketAssignee=="new-hire"){ echo "selected";}?>>New Hire</option>
             </select>
         </div>
         <input type="hidden" name="ID" value="<?php echo $id;?>">

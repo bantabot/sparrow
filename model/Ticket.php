@@ -70,7 +70,11 @@ class Ticket
     {
         $sql = "SELECT * FROM templates WHERE id=$this->id AND visible='true'";
         $this->result = mysqli_query($this->dbconn, $sql);
-        $this->result= mysqli_fetch_object($this->result);
+        $this->result = mysqli_fetch_object($this->result);
+        $this->title = $this->result->title;
+        $this->description = $this->result->description;
+        $this->assignee = $this->result->assignee;
+        $this->groupName = $this->result->group_name;
         return $this->result;
     }
 
