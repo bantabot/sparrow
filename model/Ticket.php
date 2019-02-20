@@ -60,7 +60,7 @@ class Ticket
 
     function get_ticket_by_group()
     {
-        $sql = "SELECT * FROM templates WHERE group_name IN ('$this->groups') AND visible='true'";
+        $sql = "SELECT title, description, group_name, assignee FROM templates WHERE group_name IN ('$this->groups') AND visible='true'";
         $this->result = mysqli_query($this->dbconn, $sql);
         return $this->result;
     }
@@ -68,7 +68,7 @@ class Ticket
 
     function get_ticket_by_id()
     {
-        $sql = "SELECT * FROM templates WHERE id=$this->id AND visible='true'";
+        $sql = "SELECT title, description, group_name, assignee FROM templates WHERE id=$this->id AND visible='true'";
         $this->result = mysqli_query($this->dbconn, $sql);
         $this->result = mysqli_fetch_object($this->result);
         $this->title = $this->result->title;

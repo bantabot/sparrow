@@ -28,12 +28,9 @@ $projectKey = "DC";
 // -----------------------end of grabbing global variables-----------------------
 
 $jiraClass->set_jira_auth($username, $password);
-
 $authCheck = $jiraClass->jira_auth_check();
 $jiraClass->set_epic_postfields($summary, $projectKey, $description);
 $epic = $jiraClass->jira_epic_create();
-
-
 $tickets->set_groups($groupFamily);
 $tickets = $tickets->get_ticket_by_group();
 

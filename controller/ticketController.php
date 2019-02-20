@@ -11,7 +11,25 @@ $view = false;
 
 // Check if info is coming from editTicket or addTicket so it can be saved
 
-if(isset($_POST['ticketTitle'])) {
+if (isset($_POST['action'])){
+    switch ($_POST['action']) {
+        case "save":
+            $save = true;
+            break;
+        case "update":
+            $update = true;
+            break;
+        case "delete":
+            $delete = true;
+            break;
+        case "view":
+            $view = true;
+
+    }
+
+}
+
+if($save || $update) {
 
 
     $title = $_POST['ticketTitle'];
@@ -21,48 +39,36 @@ if(isset($_POST['ticketTitle'])) {
     $ticket->set_ticket($title, $description, $assignee, $groupName);
 
 
-    if (isset($_POST['ID'])) {
+    if ($update) {
         $id = $_POST['ID'];
         $ticket->set_id($id);
-        $update = true;
-    } else {
-        $save = true;
-    }
-
-    // Check if ticket should be deleted. post variable coming from editTicket.php
-    if (isset($_POST['delete'])) {
-
-        $delete = true;
-    }
-
-}
-
-
-if (isset($_POST['action'])) {
-    if ($_POST['action']=='view'){
-        $view = true;
-    }
-
-    if ($view){
-        $groups = [];
-        foreach ($_POST as $key => $value){
-            $groups[] = $value;
-        }
-        $groups = implode("', '", $groups);
-        $ticket->set_groups($groups);
-        $tickets = $ticket->get_ticket_by_group();
-    }
-
-    elseif ($update) {
         $ticket->update();
+
     }
-    elseif ($save) {
-        $ticket->save();
+    elseif($save){
+
+       $ticket->save();
     }
-    elseif ($delete) {
-        $ticket->delete();
-    }
+
 }
+elseif ($delete){
+    $id = $_POST['ID'];
+    $ticket->set_id($id);
+    $ticket->delete();
+}
+elseif ($view){
+    $groups = [];
+    foreach ($_POST as $key => $value){
+        $groups[] = $value;
+    }
+    $groups = implode("', '", $groups);
+    $ticket->set_groups($groups);
+    $tickets = $ticket->get_ticket_by_group();
+
+}
+
+
+
 
 
 

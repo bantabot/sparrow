@@ -12,7 +12,7 @@ class TicketGroup
 
     function get_all_groups()
     {
-        $sql ="SELECT * FROM ticketGroup";
+        $sql ="SELECT id, name FROM ticketGroup";
         $ticketGroup = mysqli_query($this->dbconn, $sql);
 
         while ($group = mysqli_fetch_assoc($ticketGroup)) {
@@ -52,7 +52,7 @@ class TicketGroup
         $parentId = $group['parentId'];
 
         if($group['parentId'] != 0) {
-            $sql = "SELECT * FROM ticketGroup WHERE id=$parentId AND visible='true'";
+            $sql = "SELECT id, name FROM ticketGroup WHERE id=$parentId AND visible='true'";
             $groups = mysqli_query($this->dbconn, $sql);
                   $child = mysqli_fetch_assoc($groups);
         }
@@ -73,7 +73,7 @@ class TicketGroup
 
     function get_group_by_id($id)
     {
-        $sql = "SELECT * FROM ticketGroup WHERE id=$id AND visible='true'";
+        $sql = "SELECT id, name FROM ticketGroup WHERE id=$id AND visible='true'";
         $ticketGroup = mysqli_query($this->dbconn, $sql);
         $group = mysqli_fetch_assoc($ticketGroup);
 
