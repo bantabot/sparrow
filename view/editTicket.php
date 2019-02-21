@@ -34,11 +34,11 @@ include '../view/header.php';
 
                     foreach ($groups as $groupKey => $groupName){
 
-                    if( strtolower($ticketGroup) == strtolower($groupName)){
-                        echo '<option value="' . $ticketGroup . '" selected>' . $groupName . '</option>';
+                    if( $ticketGroup == $groupKey){
+                        echo '<option value="' . $groupKey . '" selected>' . $groupName . '</option>';
                     }
                     else {
-                        echo '<option value="' . $groupName . '">' . $groupName . '</option>';
+                        echo '<option value="' . $groupKey . '">' . $groupName . '</option>';
                     }
 
 

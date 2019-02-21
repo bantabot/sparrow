@@ -37,6 +37,23 @@ include '../view/header.php';
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="newGroup">Create group:</label>
+                <input type="text" class="form-control" id="newGroup" name="newGroup" value="">
+            </div>
+            <div class="form-group">
+                <label for="parentGroup">Parent Group</label>
+                <select class="form-control" id="parentGroup" name="parentGroup">
+<!--                    <option value="0">Select</option>-->
+                    <?php
+                    foreach ($groups as $groupKey => $groupName){
+                        echo "<option value=' ".$groupKey."'>".$groupName."</option>";
+
+                    }
+                    ?>
+                </select>
+            </div>
+
 
             <!------------------Select Assignee------------------>
 

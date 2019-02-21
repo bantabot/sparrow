@@ -62,6 +62,8 @@ class Ticket
     {
         $sql = "SELECT title, description, group_name, assignee FROM templates WHERE group_name IN ('$this->groups') AND visible='true'";
         $this->result = mysqli_query($this->dbconn, $sql);
+        $origin = "Ticket get_group_names";
+        $this->mylog($origin, $sql);
         return $this->result;
     }
 
@@ -75,6 +77,8 @@ class Ticket
         $this->description = $this->result->description;
         $this->assignee = $this->result->assignee;
         $this->groupName = $this->result->group_name;
+        $origin = "Ticket get_ticket_by_id";
+        $this->mylog($origin, $sql);
         return $this->result;
     }
 
@@ -90,6 +94,8 @@ class Ticket
         foreach ($groups as $group){
             $this->groupNames[]= $group['group_name'];
         }
+        $origin = "Ticket get_group_names";
+        $this->mylog($origin, $sql);
 
         return $this->groupNames;
 
@@ -100,6 +106,8 @@ class Ticket
     {
         $sql = "INSERT INTO templates (`title`, `description`, `group_name`, `assignee`) VALUES ('$this->title', '$this->description', '$this->groupName', '$this->assignee')";
         $this->result = mysqli_query($this->dbconn, $sql);
+        $origin = "Ticket Save";
+        $this->mylog($origin, $sql);
         return $this->result;
 
     }
@@ -109,6 +117,8 @@ class Ticket
     {
         $sql = "UPDATE `templates` SET `title` = '$this->title', `description` = '$this->description', `group_name`='$this->groupName', `assignee`= '$this->assignee' WHERE `templates`.`id` = $this->id";
         $this->result = mysqli_query($this->dbconn, $sql);
+        $origin = "Ticket Update";
+        $this->mylog($origin, $sql);
         return $this->result;
 
     }
@@ -119,9 +129,19 @@ class Ticket
 
         $this->result= mysqli_query($this->dbconn, $sql);
         $this->result = mysqli_error($this->dbconn);
+        $origin = "Ticket Delete";
+        $this->mylog($origin, $sql);
         return $this->result;
 
 
+    }
+
+
+    function mylog($origin, $sql)
+    {
+        $file = "../config/myDump.txt";
+        $dump = $origin." at . ".time()." ------ ".$sql."\n";
+        file_put_contents($file, $dump, FILE_APPEND | LOCK_EX);
     }
 
 
