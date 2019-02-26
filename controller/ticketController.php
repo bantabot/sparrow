@@ -4,7 +4,7 @@ include_once '../model/Ticket.php';
 include '../controller/groupController.php';
 
 $ticket = new Ticket;
-//$ticket->set_dbconn($dbconn);
+
 $save = false;
 $update = false;
 $delete = false;
@@ -35,9 +35,9 @@ if($save || $update) {
 
     $title = $_POST['ticketTitle'];
     $description = $_POST['ticketDescription'];
-    if($parentId ){
-        $groupName = $_POST['group'];
-    }
+//    if($saveGroup != true){
+//        $groupName = $_POST['group'];
+//    }
     $assignee = $_POST['ticketAssignee'];
     $ticket->set_ticket($title, $description, $assignee, $groupName);
 
