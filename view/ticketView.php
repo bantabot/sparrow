@@ -1,7 +1,7 @@
 <?php
 
 
-include '../config/config.php';
+//include_once '../config/config.php';
 include '../controller/ticketController.php';
 include '../view/header.php';
 
@@ -13,14 +13,12 @@ include '../view/header.php';
 
 
             <?php
-
-            while ($ticket = $tickets->fetch_object()) {
+            foreach ($tickets as $ticket){
                 echo '<div class="card">';
-                echo '<div class="card-body"> <h5 class="card-title">'. $ticket->title.'</h5>';
-               echo '<p class="card-text">'. nl2br($ticket->description).'</p>';
-               echo '<a class="card-link" href="editTicket.php?id='.$ticket->id.'">Edit Ticket</a>';
-               echo '</div> </div>';
-
+                echo '<div class="card-body"> <h5 class="card-title">'. $ticket['title'].'</h5>';
+                echo '<p class="card-text">'. nl2br($ticket['description']).'</p>';
+                echo '<a class="card-link" href="editTicket.php?id='.$ticket['id'].'">Edit Ticket</a>';
+                echo '</div> </div>';
             }
 
             ?>

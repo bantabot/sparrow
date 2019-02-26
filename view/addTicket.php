@@ -26,8 +26,10 @@ include '../view/header.php';
 
             <!------------------Get Group Name------------------>
             <div class="form-group">
-                <label for="group">Group label</label>
+                <label for="group">Existing Group</label>
                 <select class="form-control" id="group" name="group">
+                    <option value='0'>New Group</option>
+
                     <?php
                     foreach ($groups as $groupKey => $groupName){
                         echo "<option value=' ".$groupKey."'>".$groupName."</option>";
@@ -36,6 +38,10 @@ include '../view/header.php';
                     ?>
                 </select>
             </div>
+            <small> <a href="#newGroup" data-toggle="collapse" class="btn btn-outline-info btn-sm" role="button" aria-expanded="false" aria-controls="collapseExample">New Group</a>
+                <div class="collapse" id="newGroup">
+                    <div class="card card-body">
+
 
             <div class="form-group">
                 <label for="newGroup">Create group:</label>
@@ -44,8 +50,8 @@ include '../view/header.php';
             <div class="form-group">
                 <label for="parentGroup">Parent Group</label>
                 <select class="form-control" id="parentGroup" name="parentGroup">
-<!--                    <option value="0">Select</option>-->
-                    <?php
+                    <option value='0'>No parent</option>
+                   <?php
                     foreach ($groups as $groupKey => $groupName){
                         echo "<option value=' ".$groupKey."'>".$groupName."</option>";
 
@@ -53,7 +59,9 @@ include '../view/header.php';
                     ?>
                 </select>
             </div>
-
+                    </div>
+                </div>
+            </small>
 
             <!------------------Select Assignee------------------>
 

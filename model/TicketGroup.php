@@ -1,12 +1,18 @@
 <?php
 
-class TicketGroup
+include_once 'connection.php';
+
+class TicketGroup extends Connection
 {
     private $name = "";
     private $parentId = 0;
     private $id = 0;
     private $result = null;
-    private $dbconn = null;
+
+
+
+
+
 
     function get_id()
     {
@@ -14,21 +20,26 @@ class TicketGroup
     }
 
 
-    function set_dbconn($dbconn){
-        $this->dbconn = $dbconn;
-    }
-
     function get_all_groups()
     {
-        $sql ="SELECT id, name FROM ticketGroup";
-        $ticketGroup = mysqli_query($this->dbconn, $sql);
+        $con = $this->Open();
+        $sql ="SELECT id, name FROM sparrow.ticketGroup";
 
-        while ($group = mysqli_fetch_assoc($ticketGroup)) {
-            $groups[$group['id']] = $group['name'];
+        $ticketGroup  = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        if($ticketGroup->execute()){
+
+            while ($group = $ticketGroup->fetch()) {
+                $groups[$group['id']] = $group['name'];
+
+            }
 
         }
-        $origin = "TicketGroup get_all_groups";
+
+        $origin = "TicketGroup get_group_by_id";
         $this->mylog($origin, $sql);
+
+
         return $groups;
     }
 
@@ -59,12 +70,16 @@ class TicketGroup
        $group = $this->get_group_by_id($id);
 
 
-        $parentId = $group['parentId'];
+
 
         if($group['parentId'] != null) {
-            $sql = "SELECT id, name FROM ticketGroup WHERE id=$parentId AND visible='true'";
-            $groups = mysqli_query($this->dbconn, $sql);
-                  $child = mysqli_fetch_assoc($groups);
+            $parentId = $group['parentId'];
+            $con = $this->Open();
+            $sql = "SELECT id, name FROM sparrow.ticketGroup WHERE id=:parentId AND visible='true'";
+            $con = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            if ($con->execute([':parentId' => $parentId])){
+                $child= $con->fetch(PDO::FETCH_ASSOC);
+            }
             $origin = "TicketGroup get_group_parent";
             $this->mylog($origin, $sql);
         }
@@ -78,22 +93,32 @@ class TicketGroup
 
     function save($name, $parentId)
     {
-        $sql = "INSERT INTO ticketGroup (`name`, `parentId`) VALUES ('$name', '$parentId')";
-        var_dump($sql);
-        $this->result = mysqli_query($this->dbconn, $sql);
-        $this->id = mysqli_insert_id($this->dbconn);
-        $myerror = mysqli_error($this->dbconn);
+        $con = $this->Open();
+        if ($parentId === null){
+            $sql = "INSERT INTO sparrow.ticketGroup (`name`) VALUES (:name)";
+            $this->result = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY))->execute([':name'=> $name]);
+
+
+        }
+        else {
+            $sql = "INSERT INTO sparrow.ticketGroup (`name`, `parentId`) VALUES (:name, :parentId)";
+            $this->result = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY))->execute([':name' => $name, 'parentId' => $parentId]);
+            }
         $origin = "TicketGroup get_group_by_id";
         $this->mylog($origin, $sql);
+        $this->id = $con->lastInsertId();
         return $this->result;
 
     }
 
     function get_group_by_id($id)
     {
-        $sql = "SELECT id, name FROM ticketGroup WHERE id=$id AND visible='true'";
-        $ticketGroup = mysqli_query($this->dbconn, $sql);
-        $group = mysqli_fetch_assoc($ticketGroup);
+        $con= $this->Open();
+        $sql = "SELECT id, name, parentId FROM sparrow.ticketGroup WHERE id=:id AND visible='true'";
+        $con = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        if ($con->execute([':id' => $id])){
+            $group = $con->fetch();
+        }
         $origin = "TicketGroup get_group_by_id";
         $this->mylog($origin, $sql);
 
@@ -104,5 +129,30 @@ class TicketGroup
         $file = "../config/myDump.txt";
         $dump = $origin." at . ".time()." ------ ".$sql."\n";
         file_put_contents($file, $dump, FILE_APPEND | LOCK_EX);
+    }
+    function pdo_get_all_groups()
+    {
+
+
+
+        $con = $this->Open();
+        $sql ="SELECT id, name FROM sparrow.ticketGroup";
+
+        $ticketGroup  = $con->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        if($ticketGroup->execute()){
+
+            while ($group = $ticketGroup->fetch()) {
+                $groups[$group['id']] = $group['name'];
+
+            }
+
+        }
+
+        $origin = "TicketGroup get_group_by_id";
+        $this->mylog($origin, $sql);
+
+
+        return $groups;
     }
 }
