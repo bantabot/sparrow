@@ -1,14 +1,14 @@
 <?php
-$header = "All Aboard, a tool to make onboarding a little bit lighter";
-include 'view/header.php';
 
+include '../view/header.php';
+include '../controller/groupController.php';
 ?>
 
 
 
 <!------------------Begin Form---------------------->
     <div class="container">
-        <form action="successController.php" method="post">
+        <form action="success.php" method="post">
 
         <!--Manager Name-->
 
@@ -29,9 +29,12 @@ include 'view/header.php';
             <div class="form-group">
                 <label for="group">What group are they in?</label>
                 <select class="form-control" id="group" name="group">
-                    <option>Development</option>
-                    <option>Ops</option>
-                    <option>Front-End</option>
+                    <?php
+                    foreach ($groups as $groupKey => $groupName){
+                        echo "<option value=' ".$groupKey."'>".$groupName."</option>";
+
+                    }
+                    ?>
                 </select>
             </div>
 
@@ -44,4 +47,4 @@ include 'view/header.php';
 <!--End Form-->
 
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>

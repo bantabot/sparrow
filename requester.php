@@ -4,7 +4,7 @@
 
 
     //would be able to handle a curl object or a mock object
-    class AliRequester
+    class Requester
     {
         private $curl = null;
         private $response = null;

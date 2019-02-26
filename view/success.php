@@ -1,8 +1,10 @@
 
 <?php
 
-include 'view/header.php';
-$epicLink = "https://jira.mailchimp.com/browse/".$_GET['key'];
+include '../controller/successController.php';
+include '../view/header.php';
+
+$epicLink = "https://jira.mailchimp.com/browse/".$epicKey;
 
 ?>
 
@@ -20,4 +22,4 @@ $epicLink = "https://jira.mailchimp.com/browse/".$_GET['key'];
 
     </div>
 <?php
-include 'view/footer.html';?>
+include '../view/footer.html';?>
